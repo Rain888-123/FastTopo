@@ -56,9 +56,9 @@ cmake --build .
 
 ## Status / 状态
 
-Work in progress. Hash table is complete; graph construction and topological sort are being implemented.
+Work in progress. Hash table and directed graph (CSR) construction are complete; topological sort is being implemented.
 
-开发中。哈希表已完成，建图和拓扑排序正在实现。
+开发中。哈希表和有向图（CSR）建图已完成，拓扑排序正在实现。
 
 ## License / 许可证
 

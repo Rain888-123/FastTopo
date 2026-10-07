@@ -9,7 +9,9 @@ ft_ht_status_t ft_ht_create(ft_ht_t* ht, ft_ht_size_t max_elements) {
     ft_ht_size_t capacity = (ft_ht_size_t) (max_elements / LOAD_FACTOR) + 1;  // 计算最佳容量
 
     ht -> slots = (ft_ht_slot_t*) calloc(capacity, sizeof(ft_ht_slot_t));
-    if (! ht -> slots) return FT_HT_OUT_OF_MEMORY;  // 内存不足
+    if (! ht -> slots) {
+        return FT_HT_OUT_OF_MEMORY;
+    }
     ht -> capacity = capacity;
     ht -> count = 0;
 
