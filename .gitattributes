@@ -1,0 +1,6 @@
+*.h linguist-language=C
+*.c linguist-language=C
+
+include/xxhash.h linguist-vendored
+
+CMakeLists.txt linguist-language=CMake
