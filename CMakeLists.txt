@@ -6,6 +6,6 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
-file(GLOB SRC_LIST ${PROJECT_SOURCE_DIR}/src/*.c)
+file(GLOB SOURCES ${PROJECT_SOURCE_DIR}/src/*.c)
 
-add_executable(fasttopo ${SRC_LIST})
+add_executable(fasttopo ${SOURCES})

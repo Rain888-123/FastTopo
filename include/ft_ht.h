@@ -20,8 +20,8 @@ static inline XXH64_hash_t ft_ht_hash(const void* buffer, ft_ht_size_t size) {  
 }
 
 typedef enum {
-    TRUE = 1,
-    FALSE = 0
+    FT_HT_TRUE = 1,
+    FT_HT_FALSE = 0
 } ft_ht_bool_t;
 
 typedef struct {
@@ -41,7 +41,8 @@ typedef enum {
     FT_HT_FULL,
     FT_HT_EXISTS,  // 键被重复定义
     FT_HT_NOT_FOUND,  // 未找到键
-    FT_HT_OUT_OF_MEMORY  // 内存不足
+    FT_HT_OUT_OF_MEMORY,  // 内存不足
+    FT_HT_KEY_TOO_LONG  // 键过长
 } ft_ht_status_t;
 
 ft_ht_status_t ft_ht_create(ft_ht_t* ht, ft_ht_size_t capacity);

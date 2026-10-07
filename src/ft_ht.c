@@ -28,9 +28,13 @@ void ft_ht_free(ft_ht_t* ht) {
 }
 
 ft_ht_status_t ft_ht_find(const ft_ht_t* ht, const void* key, const ft_ht_size_t key_len, ft_ht_size_t* value) {
+    if (key_len > FT_HT_MAX_KEY_BYTES) {  // 键过长
+        return FT_HT_KEY_TOO_LONG;
+    }
+
     ft_ht_size_t idx = ft_ht_hash(key, key_len) % ht -> capacity;
 
-    while (ht -> slots[idx].occupied == TRUE) {  // 查找键
+    while (ht -> slots[idx].occupied == FT_HT_TRUE) {  // 查找键
         if (! memcmp(key, ht -> slots[idx].key, key_len)) {  // 比较键是否相等
             * value = ht -> slots[idx].value;
 
@@ -43,11 +47,17 @@ ft_ht_status_t ft_ht_find(const ft_ht_t* ht, const void* key, const ft_ht_size_t
 }
 
 ft_ht_status_t ft_ht_insert(ft_ht_t* ht, const void* key, const ft_ht_size_t key_len, const ft_ht_size_t value) {
-    if (ht -> capacity == ht -> count) return FT_HT_FULL;  // 表已满
+    if (key_len > FT_HT_MAX_KEY_BYTES) {  // 键过长
+        return FT_HT_KEY_TOO_LONG;
+    }
+
+    if (ht -> capacity == ht -> count) {  // 表已满
+        return FT_HT_FULL;
+    }
     
     ft_ht_size_t idx = ft_ht_hash(key, key_len) % ht -> capacity;
 
-    while (ht -> slots[idx].occupied == TRUE) {  // 查找键
+    while (ht -> slots[idx].occupied == FT_HT_TRUE) {  // 查找键
         if (! memcmp(key, ht -> slots[idx].key, key_len)) {  // 比较键是否相等
             return FT_HT_EXISTS;
         }
@@ -56,7 +66,7 @@ ft_ht_status_t ft_ht_insert(ft_ht_t* ht, const void* key, const ft_ht_size_t key
     
     memcpy(ht -> slots[idx].key, key, key_len);
     ht -> slots[idx].value = value;
-    ht -> slots[idx].occupied = TRUE;
+    ht -> slots[idx].occupied = FT_HT_TRUE;
     ht -> count ++;
 
     return FT_HT_OK;
